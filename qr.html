@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Profile - FirstAid+</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background: #f5f5f5;
+            color: #333;
+        }
+
+        .emergency-header {
+            background: #dc2626;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .profile-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-pic {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: #eee;
+            margin-right: 20px;
+        }
+
+        .profile-info h2 {
+            color: #111;
+            margin-bottom: 5px;
+        }
+
+        .emergency-contact {
+            background: #fff3f3;
+            border: 2px solid #dc2626;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .medical-info {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .first-aid-instructions {
+            background: #f0fdf4;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .instruction-step {
+            margin: 10px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+        }
+
+        .emergency-btn {
+            display: block;
+            background: #dc2626;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .instruction-step h4 {
+            color: #dc2626;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="emergency-header">
+        <h1>Emergency Medical Profile</h1>
+    </div>
+
+    <div class="container">
+        <div class="profile-card">
+            <div class="profile-header">
+                <div class="profile-pic"></div>
+                <div class="profile-info">
+                    <h2 id="patientName">Loading...</h2>
+                    <p id="patientId">ID: Loading...</p>
+                </div>
+            </div>
+
+            <div class="emergency-contact">
+                <h3>Emergency Contact</h3>
+                <p id="emergencyContact">Loading...</p>
+            </div>
+
+            <div class="medical-info">
+                <h3>Medical Condition</h3>
+                <p id="medicalCondition">Loading...</p>
+                <div id="conditionDetails"></div>
+            </div>
+
+            <div class="first-aid-instructions">
+                <h3>First Aid Instructions</h3>
+                <div id="firstAidSteps"></div>
+            </div>
+
+            <a href="tel:911" class="emergency-btn">CALL EMERGENCY (911)</a>
+        </div>
+    </div>
+
+    <script>
+        // Medical conditions database
+        const medicalDatabase = {
+            'diabetes': {
+                description: 'A condition that affects how your body turns food into energy.',
+                symptoms: 'High blood sugar, frequent urination, increased thirst, fatigue',
+                firstAid: [
+                    {
+                        title: 'Check Blood Sugar',
+                        instruction: 'If conscious, check blood sugar levels using a glucose meter'
+                    },
+                    {
+                        title: 'If Low Blood Sugar',
+                        instruction: 'Give sugar - juice, glucose tablets, or regular soda if conscious'
+                    },
+                    {
+                        title: 'If High Blood Sugar',
+                        instruction: 'Contact emergency services if showing signs of ketoacidosis'
+                    },
+                    {
+                        title: 'Monitor',
+                        instruction: 'Stay with the person and monitor their condition'
+                    }
+                ]
+            },
+            'asthma': {
+                description: 'A condition in which airways narrow and swell and produce extra mucus.',
+                symptoms: 'Shortness of breath, wheezing, coughing, chest tightness',
+                firstAid: [
+                    {
+                        title: 'Keep Calm',
+                        instruction: 'Help the person stay calm and sit upright'
+                    },
+                    {
+                        title: 'Use Inhaler',
+                        instruction: 'Help them use their rescue inhaler (usually blue)'
+                    },
+                    {
+                        title: 'Breathing Technique',
+                        instruction: 'Guide them to breathe slowly and steadily'
+                    },
+                    {
+                        title: 'Call Emergency',
+                        instruction: 'If symptoms don\'t improve after inhaler use, call emergency services'
+                    }
+                ]
+            },
+            'heart-disease': {
+                description: 'Various conditions that affect the heart\'s structure and function.',
+                symptoms: 'Chest pain, shortness of breath, fatigue, irregular heartbeat',
+                firstAid: [
+                    {
+                        title: 'Rest',
+                        instruction: 'Have the person sit or lie down immediately'
+                    },
+                    {
+                        title: 'Medication',
+                        instruction: 'Help them take prescribed medication (like nitroglycerin)'
+                    },
+                    {
+                        title: 'Call Emergency',
+                        instruction: 'Call emergency services immediately'
+                    },
+                    {
+                        title: 'Monitor',
+                        instruction: 'Monitor breathing and consciousness until help arrives'
+                    }
+                ]
+            }
+        };
+
+        // Get URL parameters
+        const params = new URLSearchParams(window.location.search);
+        const profileData = JSON.parse(decodeURIComponent(params.get('data')));
+
+        // Update profile information
+        document.getElementById('patientName').textContent = profileData.name;
+        document.getElementById('patientId').textContent = 'ID: ' + profileData.id;
+        document.getElementById('emergencyContact').textContent = 'Phone: ' + profileData.emergencyContact;
+        document.getElementById('medicalCondition').textContent = profileData.illness;
+
+        // Display condition details and first aid instructions
+        if (medicalDatabase[profileData.illness]) {
+            const condition = medicalDatabase[profileData.illness];
+            
+            const detailsHtml = `
+                <p><strong>Description:</strong> ${condition.description}</p>
+                <p><strong>Common Symptoms:</strong> ${condition.symptoms}</p>
+            `;
+            document.getElementById('conditionDetails').innerHTML = detailsHtml;
+
+            const stepsHtml = condition.firstAid.map(step => `
+                <div class="instruction-step">
+                    <h4>${step.title}</h4>
+                    <p>${step.instruction}</p>
+                </div>
+            `).join('');
+            document.getElementById('firstAidSteps').innerHTML = stepsHtml;
+        }
+    </script>
+</body>
+</html>
