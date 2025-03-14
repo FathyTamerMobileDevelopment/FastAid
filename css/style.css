@@ -809,3 +809,34 @@ nav {
 [dir="rtl"] .cta-button {
     font-family: 'Almarai', sans-serif;
 }
+
+/* Default font for English */
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* Arabic font settings */
+[dir="rtl"] * {
+    font-family: 'Almarai', sans-serif !important;
+}
+
+/* Specific font weights */
+[dir="rtl"] h1, 
+[dir="rtl"] h2, 
+[dir="rtl"] h3 {
+    font-weight: 700;
+}
+
+[dir="rtl"] p {
+    font-weight: 400;
+}
+
+[dir="rtl"] .nav-links a {
+    font-weight: 400;
+}
+
+[dir="rtl"] .btn,
+[dir="rtl"] .signup-btn,
+[dir="rtl"] .login-btn {
+    font-weight: 700;
+}
