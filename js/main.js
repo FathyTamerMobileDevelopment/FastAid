@@ -23,3 +23,22 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// Add to main.js
+function switchLanguage(lang) {
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    localStorage.setItem('preferredLanguage', lang);
+    
+    // Update all text elements
+    document.querySelectorAll('[data-translate]').forEach(element => {
+        const key = element.getAttribute('data-translate');
+        element.textContent = translations[lang][key];
+    });
+}
+
+// On page load
+document.addEventListener('DOMContentLoaded', () => {
+    const preferredLanguage = localStorage.getItem('preferredLanguage') || 'en';
+    switchLanguage(preferredLanguage);
+});

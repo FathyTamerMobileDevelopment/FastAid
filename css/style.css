@@ -398,3 +398,42 @@ select#newIllness option:checked {
         grid-template-columns: 1fr;
     }
 }
+
+/* Add to style.css */
+[dir="rtl"] {
+    text-align: right;
+}
+
+[dir="rtl"] .nav-links {
+    flex-direction: row-reverse;
+}
+
+[dir="rtl"] .service-card,
+[dir="rtl"] .about-text {
+    text-align: right;
+}
+
+.language-switch {
+    display: flex;
+    gap: 10px;
+    margin-left: 20px;
+}
+
+.lang-btn {
+    padding: 5px 10px;
+    background: transparent;
+    border: 1px solid #dc2626;
+    color: #dc2626;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.lang-btn:hover {
+    background: #dc2626;
+    color: white;
+}
+
+[dir="rtl"] .lang-btn {
+    font-family: 'Cairo', sans-serif;
+}

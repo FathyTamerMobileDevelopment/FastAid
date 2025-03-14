@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FirstAid+ | Your Personal First Aid Assistant</title>
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Navigation -->
@@ -18,6 +19,10 @@
                 <a href="login.html" class="login-btn">Login</a>
                 <a href="signup.html" class="signup-btn">Sign Up</a>
             </div>
+            <div class="language-switch">
+                <button onclick="switchLanguage('en')" class="lang-btn">English</button>
+                <button onclick="switchLanguage('ar')" class="lang-btn">عربي</button>
+            </div>
         </div>
     </nav>
 
@@ -25,8 +30,8 @@
     <section id="home" class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>Your Personal First Aid Assistant</h1>
-                <p>Get instant access to personalized first aid information through our innovative QR code system.</p>
+                <h1 data-translate="heroTitle">Your Personal First Aid Assistant</h1>
+                <p data-translate="heroDesc">Get instant access...</p>
                 <div class="hero-buttons">
                     <a href="signup.html" class="cta-button">Get Started</a>
                     <a href="login.html" class="cta-button secondary">Login</a>
