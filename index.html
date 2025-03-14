@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FirstAid+ | Your Personal First Aid Assistant</title>
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Navigation -->
@@ -13,15 +13,16 @@
         <div class="nav-container">
             <div class="logo">FirstAid+</div>
             <div class="nav-links">
-                <a href="#home">Home</a>
-                <a href="#services">Services</a>
-                <a href="#about">About</a>
-                <a href="login.html" class="login-btn">Login</a>
-                <a href="signup.html" class="signup-btn">Sign Up</a>
-            </div>
-            <div class="language-switch">
-                <button onclick="switchLanguage('en')" class="lang-btn">English</button>
-                <button onclick="switchLanguage('ar')" class="lang-btn">عربي</button>
+                <a href="#home" data-translate="home">Home</a>
+                <a href="#services" data-translate="services">Services</a>
+                <a href="#about"data-translate="about">About</a>
+                <a href="login.html" data-translate="login" class="login-btn">Login</a>
+                <a href="signup.html" data-translate="signup" class="signup-btn">Sign Up</a>
+                <!-- Add this to nav in all pages -->
+                <div class="language-switch">
+                    <button onclick="switchLanguage('en')" class="lang-btn">English</button>
+                    <button onclick="switchLanguage('ar')" class="lang-btn">عربي</button>
+                </div>
             </div>
         </div>
     </nav>
@@ -31,10 +32,10 @@
         <div class="container">
             <div class="hero-content">
                 <h1 data-translate="heroTitle">Your Personal First Aid Assistant</h1>
-                <p data-translate="heroDesc">Get instant access...</p>
+                <p data-translate="heroDesc">Get instant access to personalized first aid information through our innovative QR code system.</p>
                 <div class="hero-buttons">
-                    <a href="signup.html" class="cta-button">Get Started</a>
-                    <a href="login.html" class="cta-button secondary">Login</a>
+                    <a href="signup.html" class="cta-button" data-translate="getStarted">Get Started</a>
+                    <a href="login.html" class="cta-button secondary" data-translate="login">Login</a>
                 </div>
             </div>
             <div class="hero-image">
@@ -46,22 +47,22 @@
     <!-- Services Section -->
     <section id="services" class="services">
         <div class="container">
-            <h2>Our Services</h2>
+            <h2 data-translate="ourServices">Our Services</h2>
             <div class="services-grid">
                 <div class="service-card">
                     <div class="service-icon">🏥</div>
-                    <h3>Personal QR Code</h3>
-                    <p>Access your medical information and first aid instructions instantly</p>
+                    <h3 data-translate="personalQR">Personal QR Code</h3>
+                    <p data-translate="personalQRDesc">Access your medical information and first aid instructions instantly</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">📱</div>
-                    <h3>Emergency Information</h3>
-                    <p>Quick access to critical health information during emergencies</p>
+                    <h3 data-translate="profileManagement">Profile Management</h3>
+                    <p data-translate="profileManagementDesc">Easy updates to your health information and conditions</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">📋</div>
-                    <h3>Profile Management</h3>
-                    <p>Easy updates to your health information and conditions</p>
+                    <h3 data-translate="profileManagement">Profile Management</h3>
+                    <p data-translate="profileManagementDesc">Easy updates to your health information and conditions</p>
                 </div>
             </div>
         </div>
@@ -71,27 +72,27 @@
         <!-- Why Choose Us Section -->
     <section id="why-choose-us" class="why-choose-us">
         <div class="container">
-            <h2>Why Choose FirstAid+</h2>
+            <h2 data-translate="whyChooseUs">Why Choose FirstAid+</h2>
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">🔒</div>
-                    <h3>Secure & Private</h3>
-                    <p>Your medical information is encrypted and secure</p>
+                    <h3 data-translate="secure">Secure & Private</h3>
+                    <p data-translate="secureDesc">Your medical information is encrypted and secure</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">⚡</div>
-                    <h3>Instant Access</h3>
-                    <p>Quick access to your medical information via QR code</p>
+                    <h3 data-translate="instantAccess">Instant Access</h3>
+                    <p data-translate="instantAccessDesc">Quick access to your medical information via QR code</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">🔄</div>
-                    <h3>Easy Updates</h3>
-                    <p>Update your medical information anytime, anywhere</p>
+                    <h3 data-translate="easyUpdates">Easy Updates</h3>
+                    <p data-translate="easyUpdatesDesc">Update your medical information anytime, anywhere</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">🌐</div>
-                    <h3>Always Available</h3>
-                    <p>24/7 access to your medical profile</p>
+                    <h3 data-translate="alwaysAvailable">Always Available</h3>
+                    <p data-translate="alwaysAvailableDesc">24/7 access to your medical profile</p>
                 </div>
             </div>
         </div>
@@ -100,27 +101,27 @@
     <!-- How It Works Section -->
     <section id="how-it-works" class="how-it-works">
         <div class="container">
-            <h2>How It Works</h2>
+            <h2 data-translate="howItWorks">How It Works</h2>
             <div class="steps-container">
                 <div class="step">
                     <div class="step-number">1</div>
-                    <h3>Sign Up</h3>
-                    <p>Create your personal medical profile</p>
+                    <h3 data-translate="step1Title">Sign Up</h3>
+                    <p data-translate="step1Desc">Create your personal medical profile</p>
                 </div>
                 <div class="step">
                     <div class="step-number">2</div>
-                    <h3>Add Information</h3>
-                    <p>Input your medical conditions and emergency contacts</p>
+                    <h3 data-translate="step2Title">Add Information</h3>
+                    <p data-translate="step2Desc">Input your medical conditions and emergency contacts</p>
                 </div>
                 <div class="step">
                     <div class="step-number">3</div>
-                    <h3>Get Your QR Code</h3>
-                    <p>Receive your unique QR code</p>
+                    <h3 data-translate="step3Title">Get Your QR Code</h3>
+                    <p data-translate="step3Desc">Receive your unique QR code</p>
                 </div>
                 <div class="step">
                     <div class="step-number">4</div>
-                    <h3>Ready to Use</h3>
-                    <p>Share your QR code for instant medical information access</p>
+                    <h3 data-translate="step4Title">Ready to Use</h3>
+                    <p data-translate="step4Desc">Share your QR code for instant medical information access</p>
                 </div>
             </div>
         </div>
@@ -132,15 +133,15 @@
             <div class="stats-grid">
                 <div class="stat-card">
                     <h3>1000+</h3>
-                    <p>Active Users</p>
+                    <p data-translate="activeUsers">Active Users</p>
                 </div>
                 <div class="stat-card">
                     <h3>24/7</h3>
-                    <p>Support</p>
+                    <p data-translate="support">Support</p>
                 </div>
                 <div class="stat-card">
                     <h3>100%</h3>
-                    <p>Secure</p>
+                    <p data-translate="secure">Secure</p>
                 </div>
             </div>
         </div>
@@ -154,9 +155,9 @@
                     <img src="media/doctors-day-cute-you..._imresizer (1).jpg" alt="About Us">
                 </div>
                 <div class="about-text">
-                    <h2>About Us</h2>
-                    <p>We're dedicated to making first aid information accessible and personalized. Our innovative QR code system ensures that critical medical information is always at your fingertips.</p>
-                    <p>With FirstAid+, you can manage your health information and access specific first aid instructions tailored to your conditions.</p>
+                    <h2 data-translate="aboutUs">About Us</h2>
+                    <p data-translate="aboutDesc1">We're dedicated to making first aid information accessible and personalized. Our innovative QR code system ensures that critical medical information is always at your fingertips.</p>
+                    <p data-translate="aboutDesc2">With FirstAid+, you can manage your health information and access specific first aid instructions tailored to your conditions.</p>
                 </div>
             </div>
         </div>
@@ -168,10 +169,10 @@
             <div class="footer-grid">
                 <div class="footer-section">
                     <h3>FirstAid+</h3>
-                    <p>Your go-to personal first aid assistant, providing instant access to tailored medical information and emergency resources. With our innovative QR code system, you can manage your health details and ensure vital information is always at your fingertips. Stay prepared and informed with FastAid.</p>
+                    <p data-translate="footerDesc">Your go-to personal first aid assistant...</p>
                 </div>
                 <div class="footer-section">
-                    <h4>Quick Links</h4>
+                    <h4 data-translate="quickLinks">Quick Links</h4>
                     <ul>
                         <li><a href="#home">Home</a></li>
                         <li><a href="#services">Services</a></li>
@@ -179,13 +180,13 @@
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>Contact</h4>
+                    <h4 data-translate="contact">Contact</h4>
                     <p>Email: fathytameruix@gmail.com</p>
                     <p>Phone: (555) 123-4567</p>
                 </div>
                 <div class="footer-section">
-                    <h4>Emergency</h4>
-                    <p>24/7 Emergency Hotline:</p>
+                    <h4 data-translate="emergency">Emergency</h4>
+                    <p data-translate="emergencyHotline">24/7 Emergency Hotline:</p>
                     <p class="emergency-number">911</p>
                 </div>
             </div>
