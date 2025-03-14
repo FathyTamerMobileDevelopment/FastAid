@@ -126,8 +126,26 @@ const translations = {
         contact: "Contact",
         emergency: "Emergency",
         emergencyHotline: "24/7 Emergency Hotline:",
-        footerDesc: "Your go-to personal first aid assistant, providing instant access to tailored medical information and emergency resources. With our innovative QR code system, you can manage your health details and ensure vital information is always at your fingertips. Stay prepared and informed with FastAid."
-     },
+        footerDesc: "Your go-to personal first aid assistant, providing instant access to tailored medical information and emergency resources. With our innovative QR code system, you can manage your health details and ensure vital information is always at your fingertips. Stay prepared and informed with FastAid.",
+        // Signup Form
+        createAccount: "Create Your FirstAid+ Account",
+        fullName: "Full Name",
+        email: "Email",
+        phoneNumber: "Phone Number",
+        nationalId: "National ID",
+        password: "Password",
+        selectConditions: "Select Your Conditions",
+        
+        // Medical Conditions
+        diabetes: "Diabetes",
+        asthma: "Asthma",
+        heartDisease: "Heart Disease",
+        epilepsy: "Epilepsy",
+        allergies: "Allergies",
+        
+        // Button
+        createAccountBtn: "Create Account"
+    },
     ar: {
         home: "الرئيسية",
         services: "الخدمات",
@@ -182,6 +200,24 @@ const translations = {
         contact: "اتصل بنا",
         emergency: "طوارئ",
         emergencyHotline: "خط الطوارئ 24/7:",
+         // Signup Form
+         createAccount: "إنشاء حساب FirstAid+",
+         fullName: "الاسم الكامل",
+         email: "البريد الإلكتروني",
+         phoneNumber: "رقم الهاتف",
+         nationalId: "رقم الهوية",
+         password: "كلمة المرور",
+         selectConditions: "اختر حالاتك الصحية",
+         
+         // Medical Conditions
+         diabetes: "السكري",
+         asthma: "الربو",
+         heartDisease: "أمراض القلب",
+         epilepsy: "الصرع",
+         allergies: "الحساسية",
+         
+         // Button
+         createAccountBtn: "إنشاء حساب"
         
     }
 };

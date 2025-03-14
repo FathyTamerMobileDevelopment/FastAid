@@ -90,65 +90,79 @@
     </style>
 </head>
 <body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">FirstAid+</div>
+            <div class="nav-links">
+                <a href="index.html" data-translate="home">Home</a>
+                <a href="login.html" data-translate="login" class="login-btn">Login</a>
+                <a href="signup.html" data-translate="signup" class="signup-btn">Sign Up</a>
+                <div class="language-switch">
+                    <button onclick="switchLanguage('en')" class="lang-btn">English</button>
+                    <button onclick="switchLanguage('ar')" class="lang-btn">عربي</button>
+                </div>
+            </div>
+        </div>
+    </nav>
     <div class="signup-form">
-        <h2>Create Your FirstAid+ Account</h2>
+        <h2 data-translate="createAccount">Create Your FirstAid+ Account</h2>
         <form id="signupForm">
             <div class="form-group">
-                <label for="name">Full Name</label>
+                <label for="name" data-translate="fullName">Full Name</label>
                 <input type="text" id="name" required>
             </div>
             <div class="form-group">
-                <label for="email">Email</label>
+                <label for="email" data-translate="email">Email</label>
                 <input type="email" id="email" required>
             </div>
             <div class="form-group">
-                <label for="phone">Phone Number</label>
+                <label for="phone" data-translate="phoneNumber">Phone Number</label>
                 <input type="tel" id="phone" required>
             </div>
             <div class="form-group">
-                <label for="nationalId">National ID</label>
+                <label for="nationalId" data-translate="nationalId">National ID</label>
                 <input type="text" id="nationalId" required>
             </div>
             <div class="form-group">
-                <label for="password">Password</label>
+                <label for="password" data-translate="password">Password</label>
                 <input type="password" id="password" required>
             </div>
             <div class="form-group">
-                <label>Select Your Conditions</label>
+                <label data-translate="selectConditions">Select Your Conditions</label>
                 <div class="illness-grid">
                     <label class="illness-checkbox">
                         <input type="checkbox" name="illnesses" value="diabetes">
                         <span class="checkbox-custom">
-                            <span class="illness-name">Diabetes</span>
+                            <span class="illness-name" data-translate="diabetes">Diabetes</span>
                         </span>
                     </label>
                     <label class="illness-checkbox">
                         <input type="checkbox" name="illnesses" value="asthma">
                         <span class="checkbox-custom">
-                            <span class="illness-name">Asthma</span>
+                            <span class="illness-name" data-translate="asthma">Asthma</span>
                         </span>
                     </label>
                     <label class="illness-checkbox">
                         <input type="checkbox" name="illnesses" value="heart-disease">
                         <span class="checkbox-custom">
-                            <span class="illness-name">Heart Disease</span>
+                            <span class="illness-name" data-translate="heartDisease">Heart Disease</span>
                         </span>
                     </label>
                     <label class="illness-checkbox">
                         <input type="checkbox" name="illnesses" value="epilepsy">
                         <span class="checkbox-custom">
-                            <span class="illness-name">Epilepsy</span>
+                            <span class="illness-name" data-translate="diabetes">Epilepsy</span>
                         </span>
                     </label>
                     <label class="illness-checkbox">
                         <input type="checkbox" name="illnesses" value="allergies">
                         <span class="checkbox-custom">
-                            <span class="illness-name">Allergies</span>
+                            <span class="illness-name" data-translate="allergies">Allergies</span>
                         </span>
                     </label>
                 </div>
             </div>
-            <button type="submit" class="submit-btn">Create Account</button>
+            <button type="submit" class="submit-btn" data-translate="createAccountBtn">Create Account</button>
         </form>
     </div>
 
@@ -197,6 +211,9 @@
             // Redirect to dashboard
             window.location.href = 'dashboard.html';
         });
+        if (users.some(user => user.email === userData.email)) {
+            alert(currentLanguage === 'ar' ? 'البريد الإلكتروني مسجل مسبقاً. الرجاء استخدام بريد إلكتروني آخر.' : 'Email already registered. Please use a different email.');
+            return;}
         </script>
 
     <script src="js/main.js"></script>
