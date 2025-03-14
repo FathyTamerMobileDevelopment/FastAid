@@ -143,23 +143,6 @@
         .logout-btn:hover {
             background: red;
         }
-        
-        .illness-tag {
-        display: inline-block;
-        padding: 8px 15px;
-        background: #dc2626;
-        color: white;
-        border-radius: 20px;
-        margin: 3px;
-        font-size: 14px;
-        animation: fadeIn 0.3s ease;
-    }
-
-    /* Add this new style */
-    #userIllness .illness-tag {
-        color: white;
-    }
-        
 
         .select-hint {
     font-size: 14px;
@@ -250,67 +233,42 @@
         to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Updated Navigation Styles */
-    .nav-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        height: 70px;
-        padding: 0 20px;
-    }
+    /* Your existing styles... */
 
-    .nav-links {
-        display: flex;
-        align-items: center;
-        gap: 20px;
-    }
-
-    .nav-links .logout-btn {
+    .illness-tag {
+        display: inline-block;
+        padding: 8px 15px;
         background: #dc2626;
         color: white;
-        padding: 8px 20px;
-        border-radius: 5px;
-        text-decoration: none;
-        white-space: nowrap;
+        border-radius: 20px;
+        margin: 3px;
+        font-size: 14px;
+        animation: fadeIn 0.3s ease;
     }
 
-    .language-switch {
-        margin-left: 20px;
+    /* Add this new style */
+    #userIllness .illness-tag {
+        color: white;
     }
 
-    /* RTL Support */
-    [dir="rtl"] .nav-container {
-        flex-direction: row-reverse;
-    }
-
-    [dir="rtl"] .nav-links {
-        flex-direction: row-reverse;
-    }
-
-    [dir="rtl"] .language-switch {
-        margin-left: 0;
-        margin-right: 20px;
-    }
+    /* Rest of your existing styles... */
     </style>
 </head>
 <body>
-     <!-- Updated Navigation -->
-        <nav>
-            <div class="nav-container">
-                <div class="logo">FirstAid+</div>
-                <div class="nav-links">
-                    <a href="index.html" data-translate="home">Home</a>
-                    <a href="#" data-translate="logout" class="logout-btn">Logout</a>
-                    <div class="language-switch">
-                        <button onclick="switchLanguage('en')" class="lang-btn">English</button>
-                        <button onclick="switchLanguage('ar')" class="lang-btn">عربي</button>
-                    </div>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">FirstAid+</div>
+            <div class="nav-links">
+                <a href="#home" data-translate="home">Home</a>
+                <a href="#" class="logout-btn" data-translate="logout">Logout</a>
+                <div class="language-switch">
+                    <button onclick="switchLanguage('en')" class="lang-btn">English</button>
+                    <button onclick="switchLanguage('ar')" class="lang-btn">عربي</button>
                 </div>
             </div>
-        </nav>
-    
+        </div>
+    </nav>
 
     <div class="dashboard">
         <div class="dashboard-header">
@@ -319,10 +277,10 @@
         </div>
 
         <div class="qr-code">
-            <h3>Your Personal QR Code</h3>
+            <h3 data-translate="personalQR">Your Personal QR Code</h3>
             <div id="qrcode"></div>
             <div class="scan-instructions">
-                <h3 data-translate="personalQR">Your Personal QR Code</h3>
+                <p><strong>Scan this QR code to view:</strong></p>
                 <ul>
                     <li data-translate="personalInfo">Personal Information</li>
                     <li data-translate="medicalConditions">Medical Conditions</li>
@@ -338,11 +296,12 @@
             <p><span data-translate="medicalCondition">Medical Condition</span>: <span id="userIllness"></span></p>
             <p><span data-translate="emergencyContact">Emergency Contact</span>: <span id="userPhone"></span></p>
             <p><span data-translate="nationalId">National ID</span>: <span id="userNationalId"></span></p>
-         </div>
+        </div>
+        
 
         <!-- Replace your current select element with this new interface -->
         <div class="update-section">
-        <h3 data-translate="updateMedical">Update Medical Information</h3>
+    <h3 data-translate="updateMedical">Update Medical Information</h3>
             <div class="illness-grid">
                 <label class="illness-checkbox">
                     <input type="checkbox" value="diabetes">
@@ -385,75 +344,89 @@
         </div>
 
         <div style="text-align: center;">
-            <a href="index.html" class="logout-btn" data-translate="logout">Logout</a>
+            <a href="index.html" class="logout-btn" data-translate="logout" >Logout</a>
         </div>
     </div>
 
     <script src="js/qrcode.min.js"></script>
-<script>
-    // Update the onload function
-    window.onload = function() {
-        const userInfo = localStorage.getItem('userInfo');
-        if (!userInfo) {
-            window.location.href = 'index.html';
-            return;
+    <script>
+        // Update the onload function
+        window.onload = function() {
+            const userInfo = localStorage.getItem('userInfo');
+            if (!userInfo) {
+                window.location.href = 'index.html';
+                return;
+            }
+    
+            // Parse and display user info
+            const userData = JSON.parse(userInfo);
+            document.getElementById('userName').textContent = userData.name;
+            document.getElementById('userNameInfo').textContent = userData.name;
+            document.getElementById('userPhone').textContent = userData.phone;
+            document.getElementById('userNationalId').textContent = userData.nationalId;
+    
+            // Display illnesses as tags
+            const illnessElement = document.getElementById('userIllness');
+            if (illnessElement) {
+                const illnesses = userData.illnesses || [];
+                if (illnesses.length > 0) {
+                    illnessElement.innerHTML = illnesses.map(illness => 
+                        `<span class="illness-tag">${illness.charAt(0).toUpperCase() + illness.slice(1).replace('-', ' ')}</span>`
+                    ).join(' ');
+                } else {
+                    illnessElement.textContent = 'No conditions selected';
+                }
+            }
+    
+            // Pre-check current illnesses
+            const checkboxes = document.querySelectorAll('.illness-checkbox input');
+            checkboxes.forEach(checkbox => {
+                if (userData.illnesses && userData.illnesses.includes(checkbox.value)) {
+                    checkbox.checked = true;
+                }
+            });
         }
-
-        // Parse and display user info
-        const userData = JSON.parse(userInfo);
-        document.getElementById('userName').textContent = userData.name;
-        document.getElementById('userNameInfo').textContent = userData.name;
-        document.getElementById('userPhone').textContent = userData.phone;
-        document.getElementById('userNationalId').textContent = userData.nationalId;
-
-        // Display illnesses
-        const illnessElement = document.getElementById('userIllness');
-        if (illnessElement) {
-            const illnesses = userData.illnesses || [];
-            if (illnesses.length > 0) {
-                illnessElement.innerHTML = illnesses.map(illness => 
-                    `<span class="illness-tag">${illness.charAt(0).toUpperCase() + illness.slice(1).replace('-', ' ')}</span>`
-                ).join(' ');
-            } else {
-                illnessElement.textContent = translations[currentLanguage].noConditions;
+    
+        // Update medical info function
+        function updateMedicalInfo() {
+            const checkboxes = document.querySelectorAll('.illness-checkbox input:checked');
+            const selectedIllnesses = Array.from(checkboxes).map(checkbox => checkbox.value);
+            
+            if (selectedIllnesses.length > 0) {
+                const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+                userInfo.illnesses = selectedIllnesses;
+                localStorage.setItem('userInfo', JSON.stringify(userInfo));
+                location.reload();
             }
         }
 
-        // Generate QR Code
-        const qrData = JSON.stringify({
-            name: userData.name,
-            phone: userData.phone,
-            nationalId: userData.nationalId,
-            illnesses: userData.illnesses || []
+        // Add this to your existing script section
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all logout buttons
+            const logoutButtons = document.querySelectorAll('.logout-btn');
+            
+            logoutButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    // Clear user data from localStorage
+                    localStorage.removeItem('userInfo');
+                    // Redirect to index page
+                    window.location.href = 'index.html';
+                });
+            });
         });
 
-        document.getElementById('qrcode').innerHTML = '';
-        new QRCode(document.getElementById("qrcode"), {
-            text: qrData,
-            width: 200,
-            height: 200,
-            colorDark : "#000000",
-            colorLight : "#ffffff",
-            correctLevel : QRCode.CorrectLevel.H
-        });
-
-        // Pre-check current illnesses
-        const checkboxes = document.querySelectorAll('.illness-checkbox input');
-        checkboxes.forEach(checkbox => {
-            if (userData.illnesses && userData.illnesses.includes(checkbox.value)) {
-                checkbox.checked = true;
-            }
-        });
-    }
-
-    function updateMedicalInfo() {
-        const checkboxes = document.querySelectorAll('.illness-checkbox input:checked');
-        const selectedIllnesses = Array.from(checkboxes).map(checkbox => checkbox.value);
-        
+        function updateMedicalInfo() {
+    const checkboxes = document.querySelectorAll('.illness-checkbox input:checked');
+    const selectedIllnesses = Array.from(checkboxes).map(checkbox => checkbox.value);
+    
+    if (selectedIllnesses.length >= 0) { // Changed from > 0 to >= 0 to allow clearing all conditions
+        // Update userInfo
         const userInfo = JSON.parse(localStorage.getItem('userInfo'));
         userInfo.illnesses = selectedIllnesses;
         localStorage.setItem('userInfo', JSON.stringify(userInfo));
 
+        // Update user in users array
         const users = JSON.parse(localStorage.getItem('users')) || [];
         const userIndex = users.findIndex(u => u.email === userInfo.email);
         if (userIndex !== -1) {
@@ -463,24 +436,9 @@
 
         location.reload();
     }
-
-    // Logout functionality
-    document.addEventListener('DOMContentLoaded', function() {
-        const logoutButtons = document.querySelectorAll('.logout-btn');
-        logoutButtons.forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                localStorage.removeItem('userInfo');
-                window.location.href = 'index.html';
-            });
-        });
-        
-        // Initialize language
-        switchLanguage('en');
-    });
-</script>
-<script src="js/main.js"></script>
-<script src="js/qr.js"></script>
+}
+    </script>
+    <script src="js/qr.js"></script>
 
 </body>
 </html>
