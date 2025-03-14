@@ -336,15 +336,15 @@
                 window.location.href = 'index.html';
                 return;
             }
-    
+
             // Parse and display user info
             const userData = JSON.parse(userInfo);
             document.getElementById('userName').textContent = userData.name;
             document.getElementById('userNameInfo').textContent = userData.name;
             document.getElementById('userPhone').textContent = userData.phone;
             document.getElementById('userNationalId').textContent = userData.nationalId;
-    
-            // Display illnesses as tags
+
+            // Display illnesses
             const illnessElement = document.getElementById('userIllness');
             if (illnessElement) {
                 const illnesses = userData.illnesses || [];
@@ -356,14 +356,36 @@
                     illnessElement.textContent = 'No conditions selected';
                 }
             }
-    
-            // Pre-check current illnesses
+
+            // Generate QR Code immediately
+            const qrData = JSON.stringify({
+                name: userData.name,
+                phone: userData.phone,
+                nationalId: userData.nationalId,
+                illnesses: userData.illnesses || []
+            });
+
+            // Clear existing QR code if any
+            document.getElementById('qrcode').innerHTML = '';
+            
+            // Generate new QR code
+            new QRCode(document.getElementById("qrcode"), {
+                text: qrData,
+                width: 200,
+                height: 200,
+                colorDark : "#000000",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
+
+            // Pre-check current illnesses in the update section
             const checkboxes = document.querySelectorAll('.illness-checkbox input');
             checkboxes.forEach(checkbox => {
                 if (userData.illnesses && userData.illnesses.includes(checkbox.value)) {
                     checkbox.checked = true;
                 }
             });
+
         }
     
         // Update medical info function

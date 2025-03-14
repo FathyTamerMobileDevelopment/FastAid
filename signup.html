@@ -46,6 +46,47 @@
         .submit-btn:hover {
             background: #b91c1c;
         }
+
+        .illness-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .illness-checkbox {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .checkbox-custom {
+            display: block;
+            padding: 10px;
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .illness-name {
+            display: block;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .illness-checkbox input {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .illness-checkbox input:checked + .checkbox-custom {
+            background: #fecaca;
+            border-color: #dc2626;
+        }
+
+        .illness-checkbox:hover .checkbox-custom {
+            border-color: #dc2626;
+        }
     </style>
 </head>
 <body>
@@ -73,15 +114,39 @@
                 <input type="password" id="password" required>
             </div>
             <div class="form-group">
-                <label for="illness">Select Your Condition</label>
-                <select id="illness" required>
-                    <option value="">Select a condition</option>
-                    <option value="diabetes">Diabetes</option>
-                    <option value="asthma">Asthma</option>
-                    <option value="heart-disease">Heart Disease</option>
-                    <option value="epilepsy">Epilepsy</option>
-                    <option value="allergies">Allergies</option>
-                </select>
+                <label>Select Your Conditions</label>
+                <div class="illness-grid">
+                    <label class="illness-checkbox">
+                        <input type="checkbox" name="illnesses" value="diabetes">
+                        <span class="checkbox-custom">
+                            <span class="illness-name">Diabetes</span>
+                        </span>
+                    </label>
+                    <label class="illness-checkbox">
+                        <input type="checkbox" name="illnesses" value="asthma">
+                        <span class="checkbox-custom">
+                            <span class="illness-name">Asthma</span>
+                        </span>
+                    </label>
+                    <label class="illness-checkbox">
+                        <input type="checkbox" name="illnesses" value="heart-disease">
+                        <span class="checkbox-custom">
+                            <span class="illness-name">Heart Disease</span>
+                        </span>
+                    </label>
+                    <label class="illness-checkbox">
+                        <input type="checkbox" name="illnesses" value="epilepsy">
+                        <span class="checkbox-custom">
+                            <span class="illness-name">Epilepsy</span>
+                        </span>
+                    </label>
+                    <label class="illness-checkbox">
+                        <input type="checkbox" name="illnesses" value="allergies">
+                        <span class="checkbox-custom">
+                            <span class="illness-name">Allergies</span>
+                        </span>
+                    </label>
+                </div>
             </div>
             <button type="submit" class="submit-btn">Create Account</button>
         </form>
@@ -90,33 +155,37 @@
     <script>
         document.getElementById('signupForm').addEventListener('submit', function(e) {
             e.preventDefault();
-        
-            // Get form values
+
+            // Get selected illnesses
+            const selectedIllnesses = Array.from(document.querySelectorAll('input[name="illnesses"]:checked'))
+                .map(checkbox => checkbox.value);
+
+            // Create user data object
             const userData = {
                 name: document.getElementById('name').value,
                 email: document.getElementById('email').value,
                 phone: document.getElementById('phone').value,
                 nationalId: document.getElementById('nationalId').value,
                 password: document.getElementById('password').value,
-                illnesses: [document.getElementById('illness').value] // Store as array for multiple conditions
+                illnesses: selectedIllnesses
             };
-        
+
             // Get existing users or initialize empty array
             let users = JSON.parse(localStorage.getItem('users')) || [];
-        
+
             // Check if email already exists
             if (users.some(user => user.email === userData.email)) {
                 alert('Email already registered. Please use a different email.');
                 return;
             }
-        
+
             // Add new user
             users.push(userData);
-        
+
             // Save to localStorage
             localStorage.setItem('users', JSON.stringify(users));
-        
-            // Also set current user info for immediate login
+
+            // Set current user info
             localStorage.setItem('userInfo', JSON.stringify({
                 name: userData.name,
                 email: userData.email,
@@ -124,7 +193,7 @@
                 nationalId: userData.nationalId,
                 illnesses: userData.illnesses
             }));
-        
+
             // Redirect to dashboard
             window.location.href = 'dashboard.html';
         });
