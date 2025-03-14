@@ -137,7 +137,6 @@
             color: white;
             text-decoration: none;
             border-radius: 5px;
-            margin-top: 20px;
             transition: background-color 0.3s;
         }
 
@@ -233,205 +232,211 @@
         from { opacity: 0; transform: translateY(5px); }
         to { opacity: 1; transform: translateY(0); }
     }
+
+    /* Updated Navigation Styles */
+    .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 70px;
+        padding: 0 20px;
+    }
+
+    .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .nav-links .logout-btn {
+        background: #dc2626;
+        color: white;
+        padding: 8px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    .language-switch {
+        margin-left: 20px;
+    }
+
+    /* RTL Support */
+    [dir="rtl"] .nav-container {
+        flex-direction: row-reverse;
+    }
+
+    [dir="rtl"] .nav-links {
+        flex-direction: row-reverse;
+    }
+
+    [dir="rtl"] .language-switch {
+        margin-left: 0;
+        margin-right: 20px;
+    }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
-        <div class="nav-container">
-            <div class="logo">FirstAid+</div>
-            <div class="nav-links">
-                <a href="index.html">Home</a>
-                <a href="#" class="logout-btn">Logout</a>
-                <div class="language-switch">
-                    <button onclick="switchLanguage('en')" class="lang-btn">English</button>
-                    <button onclick="switchLanguage('ar')" class="lang-btn">عربي</button>
+     <!-- Updated Navigation -->
+        <nav>
+            <div class="nav-container">
+                <div class="logo">FirstAid+</div>
+                <div class="nav-links">
+                    <a href="index.html" data-translate="home">Home</a>
+                    <a href="#" data-translate="logout" class="logout-btn">Logout</a>
+                    <div class="language-switch">
+                        <button onclick="switchLanguage('en')" class="lang-btn">English</button>
+                        <button onclick="switchLanguage('ar')" class="lang-btn">عربي</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </nav>
+        </nav>
+    
 
     <div class="dashboard">
         <div class="dashboard-header">
-            <h2>Your First Aid Dashboard</h2>
-            <p>Welcome, <span id="userName">User</span>!</p>
+            <h2 data-translate="dashboard">Your First Aid Dashboard</h2>
+            <p><span data-translate="welcome">Welcome</span>, <span id="userName">User</span>!</p>
         </div>
 
         <div class="qr-code">
             <h3>Your Personal QR Code</h3>
             <div id="qrcode"></div>
             <div class="scan-instructions">
-                <p><strong>Scan this QR code to view:</strong></p>
+                <h3 data-translate="personalQR">Your Personal QR Code</h3>
                 <ul>
-                    <li>Personal Information</li>
-                    <li>Medical Conditions</li>
-                    <li>First Aid Instructions</li>
-                    <li>Emergency Contacts</li>
+                    <li data-translate="personalInfo">Personal Information</li>
+                    <li data-translate="medicalConditions">Medical Conditions</li>
+                    <li data-translate="firstAidInstructions">First Aid Instructions</li>
+                    <li data-translate="emergencyContacts">Emergency Contacts</li>
                 </ul>
             </div>
         </div>
 
         <div class="info-box">
-            <h3>Current Information</h3>
-            <p>Name: <span id="userNameInfo"></span></p>
-            <p>Medical Condition: <span id="userIllness"></span></p>
-            <p>Emergency Contact: <span id="userPhone"></span></p>
-            <p>National ID: <span id="userNationalId"></span></p>
-        </div>
-        I'll help you create a more modern illness selection interface using checkboxes with a better UI. Here's the updated version:
+            <h3 data-translate="currentInfo">Current Information</h3>
+            <p><span data-translate="name">Name</span>: <span id="userNameInfo"></span></p>
+            <p><span data-translate="medicalCondition">Medical Condition</span>: <span id="userIllness"></span></p>
+            <p><span data-translate="emergencyContact">Emergency Contact</span>: <span id="userPhone"></span></p>
+            <p><span data-translate="nationalId">National ID</span>: <span id="userNationalId"></span></p>
+         </div>
 
-        html
-        Copy code
         <!-- Replace your current select element with this new interface -->
         <div class="update-section">
-            <h3>Update Medical Information</h3>
+        <h3 data-translate="updateMedical">Update Medical Information</h3>
             <div class="illness-grid">
                 <label class="illness-checkbox">
                     <input type="checkbox" value="diabetes">
                     <span class="checkbox-custom">
-                        <span class="illness-name">Diabetes</span>
+                        <span class="illness-name" data-translate="diabetes">Diabetes</span>
                     </span>
                 </label>
                 <label class="illness-checkbox">
                     <input type="checkbox" value="asthma">
                     <span class="checkbox-custom">
-                        <span class="illness-name">Asthma</span>
+                        <span class="illness-name" data-translate="asthma">Asthma</span>
                     </span>
                 </label>
                 <label class="illness-checkbox">
                     <input type="checkbox" value="heart-disease">
                     <span class="checkbox-custom">
-                        <span class="illness-name">Heart Disease</span>
+                        <span class="illness-name" data-translate="heartDisease">Heart Disease</span>
                     </span>
                 </label>
                 <label class="illness-checkbox">
                     <input type="checkbox" value="epilepsy">
                     <span class="checkbox-custom">
-                        <span class="illness-name">Epilepsy</span>
+                        <span class="illness-name" data-translate="epilepsy">Epilepsy</span>
                     </span>
                 </label>
                 <label class="illness-checkbox">
                     <input type="checkbox" value="allergies">
                     <span class="checkbox-custom">
-                        <span class="illness-name">Allergies</span>
+                        <span class="illness-name" data-translate="allergies">Allergies</span>
                     </span>
                 </label>
                 <label class="illness-checkbox">
                     <input type="checkbox" value="hypertension">
                     <span class="checkbox-custom">
-                        <span class="illness-name">Hypertension</span>
+                        <span class="illness-name" data-translate="hypertension">Hypertension</span>
                     </span>
                 </label>
             </div>
-            <button onclick="updateMedicalInfo()" class="update-btn">Update Information</button>
+            <button onclick="updateMedicalInfo()" class="update-btn" data-translate="updateInfo">Update Information</button>
         </div>
 
         <div style="text-align: center;">
-            <a href="index.html" class="logout-btn">Logout</a>
+            <a href="index.html" class="logout-btn" data-translate="logout">Logout</a>
         </div>
     </div>
 
     <script src="js/qrcode.min.js"></script>
-    <script>
-        // Update the onload function
-        window.onload = function() {
-            const userInfo = localStorage.getItem('userInfo');
-            if (!userInfo) {
-                window.location.href = 'index.html';
-                return;
-            }
-
-            // Parse and display user info
-            const userData = JSON.parse(userInfo);
-            document.getElementById('userName').textContent = userData.name;
-            document.getElementById('userNameInfo').textContent = userData.name;
-            document.getElementById('userPhone').textContent = userData.phone;
-            document.getElementById('userNationalId').textContent = userData.nationalId;
-
-            // Display illnesses
-            const illnessElement = document.getElementById('userIllness');
-            if (illnessElement) {
-                const illnesses = userData.illnesses || [];
-                if (illnesses.length > 0) {
-                    illnessElement.innerHTML = illnesses.map(illness => 
-                        `<span class="illness-tag">${illness.charAt(0).toUpperCase() + illness.slice(1).replace('-', ' ')}</span>`
-                    ).join(' ');
-                } else {
-                    illnessElement.textContent = 'No conditions selected';
-                }
-            }
-
-            // Generate QR Code immediately
-            const qrData = JSON.stringify({
-                name: userData.name,
-                phone: userData.phone,
-                nationalId: userData.nationalId,
-                illnesses: userData.illnesses || []
-            });
-
-            // Clear existing QR code if any
-            document.getElementById('qrcode').innerHTML = '';
-            
-            // Generate new QR code
-            new QRCode(document.getElementById("qrcode"), {
-                text: qrData,
-                width: 200,
-                height: 200,
-                colorDark : "#000000",
-                colorLight : "#ffffff",
-                correctLevel : QRCode.CorrectLevel.H
-            });
-
-            // Pre-check current illnesses in the update section
-            const checkboxes = document.querySelectorAll('.illness-checkbox input');
-            checkboxes.forEach(checkbox => {
-                if (userData.illnesses && userData.illnesses.includes(checkbox.value)) {
-                    checkbox.checked = true;
-                }
-            });
-
+<script>
+    // Update the onload function
+    window.onload = function() {
+        const userInfo = localStorage.getItem('userInfo');
+        if (!userInfo) {
+            window.location.href = 'index.html';
+            return;
         }
-    
-        // Update medical info function
-        function updateMedicalInfo() {
-            const checkboxes = document.querySelectorAll('.illness-checkbox input:checked');
-            const selectedIllnesses = Array.from(checkboxes).map(checkbox => checkbox.value);
-            
-            if (selectedIllnesses.length > 0) {
-                const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-                userInfo.illnesses = selectedIllnesses;
-                localStorage.setItem('userInfo', JSON.stringify(userInfo));
-                location.reload();
+
+        // Parse and display user info
+        const userData = JSON.parse(userInfo);
+        document.getElementById('userName').textContent = userData.name;
+        document.getElementById('userNameInfo').textContent = userData.name;
+        document.getElementById('userPhone').textContent = userData.phone;
+        document.getElementById('userNationalId').textContent = userData.nationalId;
+
+        // Display illnesses
+        const illnessElement = document.getElementById('userIllness');
+        if (illnessElement) {
+            const illnesses = userData.illnesses || [];
+            if (illnesses.length > 0) {
+                illnessElement.innerHTML = illnesses.map(illness => 
+                    `<span class="illness-tag">${illness.charAt(0).toUpperCase() + illness.slice(1).replace('-', ' ')}</span>`
+                ).join(' ');
+            } else {
+                illnessElement.textContent = translations[currentLanguage].noConditions;
             }
         }
 
-        // Add this to your existing script section
-        document.addEventListener('DOMContentLoaded', function() {
-            // Get all logout buttons
-            const logoutButtons = document.querySelectorAll('.logout-btn');
-            
-            logoutButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    // Clear user data from localStorage
-                    localStorage.removeItem('userInfo');
-                    // Redirect to index page
-                    window.location.href = 'index.html';
-                });
-            });
+        // Generate QR Code
+        const qrData = JSON.stringify({
+            name: userData.name,
+            phone: userData.phone,
+            nationalId: userData.nationalId,
+            illnesses: userData.illnesses || []
         });
 
-        function updateMedicalInfo() {
-    const checkboxes = document.querySelectorAll('.illness-checkbox input:checked');
-    const selectedIllnesses = Array.from(checkboxes).map(checkbox => checkbox.value);
-    
-    if (selectedIllnesses.length >= 0) { // Changed from > 0 to >= 0 to allow clearing all conditions
-        // Update userInfo
+        document.getElementById('qrcode').innerHTML = '';
+        new QRCode(document.getElementById("qrcode"), {
+            text: qrData,
+            width: 200,
+            height: 200,
+            colorDark : "#000000",
+            colorLight : "#ffffff",
+            correctLevel : QRCode.CorrectLevel.H
+        });
+
+        // Pre-check current illnesses
+        const checkboxes = document.querySelectorAll('.illness-checkbox input');
+        checkboxes.forEach(checkbox => {
+            if (userData.illnesses && userData.illnesses.includes(checkbox.value)) {
+                checkbox.checked = true;
+            }
+        });
+    }
+
+    function updateMedicalInfo() {
+        const checkboxes = document.querySelectorAll('.illness-checkbox input:checked');
+        const selectedIllnesses = Array.from(checkboxes).map(checkbox => checkbox.value);
+        
         const userInfo = JSON.parse(localStorage.getItem('userInfo'));
         userInfo.illnesses = selectedIllnesses;
         localStorage.setItem('userInfo', JSON.stringify(userInfo));
 
-        // Update user in users array
         const users = JSON.parse(localStorage.getItem('users')) || [];
         const userIndex = users.findIndex(u => u.email === userInfo.email);
         if (userIndex !== -1) {
@@ -441,9 +446,24 @@
 
         location.reload();
     }
-}
-    </script>
-    <script src="js/qr.js"></script>
+
+    // Logout functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        const logoutButtons = document.querySelectorAll('.logout-btn');
+        logoutButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                localStorage.removeItem('userInfo');
+                window.location.href = 'index.html';
+            });
+        });
+        
+        // Initialize language
+        switchLanguage('en');
+    });
+</script>
+<script src="js/main.js"></script>
+<script src="js/qr.js"></script>
 
 </body>
 </html>

@@ -144,7 +144,34 @@ const translations = {
         allergies: "Allergies",
         
         // Button
-        createAccountBtn: "Create Account"
+        createAccountBtn: "Create Account",
+        // Existing translations...
+        loginTitle: "Login to FirstAid+",
+        email: "Email",
+        password: "Password",
+        loginButton: "Login",
+        noAccount: "Don't have an account?",
+        signupHere: "Sign up here",
+        forgotPassword: "Forgot Password?",
+        home: "Home",
+        logout: "Logout",
+        dashboard: "Your First Aid Dashboard",
+        welcome: "Welcome",
+        personalQR: "Your Personal QR Code",
+        scanInstructions: "Scan this QR code to view:",
+        personalInfo: "Personal Information",
+        medicalConditions: "Medical Conditions",
+        firstAidInstructions: "First Aid Instructions",
+        emergencyContacts: "Emergency Contacts",
+        currentInfo: "Current Information",
+        name: "Name",
+        medicalCondition: "Medical Condition",
+        emergencyContact: "Emergency Contact",
+        nationalId: "National ID",
+        updateMedical: "Update Medical Information",
+        updateInfo: "Update Information",
+        noConditions: "No conditions selected",
+        hypertension: "Hypertension"
     },
     ar: {
         home: "الرئيسية",
@@ -217,7 +244,68 @@ const translations = {
          allergies: "الحساسية",
          
          // Button
-         createAccountBtn: "إنشاء حساب"
+         createAccountBtn: "إنشاء حساب",
+          // Existing translations...
+        loginTitle: "تسجيل الدخول إلى FirstAid+",
+        email: "البريد الإلكتروني",
+        password: "كلمة المرور",
+        loginButton: "تسجيل الدخول",
+        noAccount: "ليس لديك حساب؟",
+        signupHere: "سجل هنا",
+        forgotPassword: "نسيت كلمة المرور؟",
+        home: "الرئيسية",
+        logout: "تسجيل الخروج",
+        dashboard: "لوحة الإسعافات الأولية الخاصة بك",
+        welcome: "مرحباً",
+        personalQR: "رمز QR الخاص بك",
+        scanInstructions: "امسح رمز QR لعرض:",
+        personalInfo: "المعلومات الشخصية",
+        medicalConditions: "الحالات الطبية",
+        firstAidInstructions: "تعليمات الإسعافات الأولية",
+        emergencyContacts: "جهات الاتصال في حالات الطوارئ",
+        currentInfo: "المعلومات الحالية",
+        name: "الاسم",
+        medicalCondition: "الحالة الطبية",
+        emergencyContact: "رقم الطوارئ",
+        nationalId: "رقم الهوية",
+        updateMedical: "تحديث المعلومات الطبية",
+        updateInfo: "تحديث المعلومات",
+        noConditions: "لم يتم تحديد أي حالات",
+        hypertension: "ارتفاع ضغط الدم"
+
         
     }
 };
+
+
+// Language switching function
+let currentLanguage = 'en';
+
+function switchLanguage(language) {
+    currentLanguage = language;
+    document.documentElement.setAttribute('dir', language === 'ar' ? 'rtl' : 'ltr');
+    document.documentElement.setAttribute('lang', language);
+    
+    const elements = document.querySelectorAll('[data-translate]');
+    elements.forEach(element => {
+        const key = element.getAttribute('data-translate');
+        if (translations[language] && translations[language][key]) {
+            element.textContent = translations[language][key];
+        }
+    });
+
+    // Update illness tags
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    if (userInfo && userInfo.illnesses) {
+        const illnessElement = document.getElementById('userIllness');
+        if (illnessElement) {
+            if (userInfo.illnesses.length > 0) {
+                illnessElement.innerHTML = userInfo.illnesses.map(illness => 
+                    `<span class="illness-tag">${translations[language][illness] || illness}</span>`
+                ).join(' ');
+            } else {
+                illnessElement.textContent = translations[language].noConditions;
+            }
+        }
+    }
+}
