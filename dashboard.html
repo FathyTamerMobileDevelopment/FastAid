@@ -437,7 +437,46 @@
         location.reload();
     }
 }
+
+// Language switching function
+let currentLanguage = 'en';
+
+function switchLanguage(language) {
+    currentLanguage = language;
+    document.documentElement.setAttribute('dir', language === 'ar' ? 'rtl' : 'ltr');
+    document.documentElement.setAttribute('lang', language);
+    
+    const elements = document.querySelectorAll('[data-translate]');
+    elements.forEach(element => {
+        const key = element.getAttribute('data-translate');
+        if (translations[language] && translations[language][key]) {
+            element.textContent = translations[language][key];
+        }
+    });
+
+    // Update illness tags
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    if (userInfo && userInfo.illnesses) {
+        const illnessElement = document.getElementById('userIllness');
+        if (illnessElement) {
+            if (userInfo.illnesses.length > 0) {
+                illnessElement.innerHTML = userInfo.illnesses.map(illness => 
+                    `<span class="illness-tag">${translations[language][illness] || illness}</span>`
+                ).join(' ');
+            } else {
+                illnessElement.textContent = translations[language].noConditions;
+            }
+        }
+    }
+}
+function switchLanguage(language) {
+    console.log('Switching to:', language);
+    console.log('Translations available:', translations);
+    // ... rest of your function
+}
     </script>
+    <script src="js/qrcode.min.js"></script>
+    <script src="js/main.js"></script>
     <script src="js/qr.js"></script>
 
 </body>
